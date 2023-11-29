@@ -1,0 +1,35 @@
+---
+title: "RWorksheet#5_group(1)"
+output: pdf_document
+date: "2023-11-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+install.packages("rvest")
+install.packages("httr")
+install.packages("polite")
+ 
+library(rvest)
+library(httr)
+library(polite)
+
+
+url = "https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250"
+session <- bow(url, user_agent = "Educational Purpose")
+session
+
+for (i in 1:50)
+{
+title_list <- scrape(session) %>%
+html_nodes('h3.ipc-title__text') %>%
+html_text
+
+title <- data.frame(title_list)
+title
+
+}
+
+
